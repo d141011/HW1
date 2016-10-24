@@ -7,7 +7,7 @@ body{
 .wrapper{
 	height: 470px;
     width: 310px;
-	 background-color:rgba(0, 0, 0,0.6);
+	 background-color:rgba(172, 237, 224,0.6);
     margin: 0 auto; /* to make the div center align to the browser */
     padding: 20px;
 	border-radius:20px;
@@ -41,5 +41,5 @@ body{
 	width:40px;
 	margin-right:10px;
 	border-radius:5px;
-	background-color:#fff;
+	background-color:#dac7d5;
 }
