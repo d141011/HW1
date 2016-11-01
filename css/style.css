@@ -6,7 +6,7 @@ body{
 
 .wrapper{
 	height: 470px;
-    width: 310px;
+    width: 300px;
 	 background-color:rgba(0, 0, 0,0.6);
     margin: 0 auto; /* to make the div center align to the browser */
     padding: 20px;
@@ -26,6 +26,7 @@ body{
 	color:#fff;
 	text-align:right;
 	height:15px;
+	overflow:hidden;
 }
 
 .convert{
@@ -34,12 +35,14 @@ body{
 
 .row{
 	margin-top:10px;
-	margin-right:-10px;
 }
 
 .press{
+	float:left;
+	position:relative;
 	height:40px;
 	width:40px;
+	margin-top:10px;
 	margin-right:10px;
 	border-radius:5px;
 	background-color:#fff;
