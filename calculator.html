@@ -13,13 +13,12 @@
 Calculator
 </div>
 <div id="area" class="area">
-50
 </div>
 <div class="convert">
-<p>HEX <span id="hex">32</span></p>
-<p>DEC <span id="dec">50</span></p>
-<p>OCT <span id="oct">62</span></p>
-<p>BIN <span id="bin">110010</span></p>
+<p>HEX <span id="hex"></span></p>
+<p>DEC <span id="dec"></span></p>
+<p>OCT <span id="oct"></span></p>
+<p>BIN <span id="bin"></span></p>
 </div>
 <div class="row">
 <button class="press">&nbsp;</button>
@@ -27,27 +26,27 @@ Calculator
 <button class="press">CE</button>
 <button class="press">C</button>
 <button class="press">←</button>
-<button class="press">%</button>
+<button class="press" value="%">%</button>
 </div>
 <div class="row">
 <button class="press">A</button>
 <button class="press">B</button>
-<button class="press">7</button>
-<button class="press">8</button>
-<button class="press">9</button>
-<button class="press">x</button>
+<button class="press" value="7">7</button>
+<button class="press" value="8">8</button>
+<button class="press" value="9">9</button>
+<button class="press" value="*">x</button>
 </div>
 <div class="row">
 <button class="press">C</button>
 <button class="press">D</button>
-<button class="press">4</button>
-<button class="press">5</button>
-<button class="press">6</button>
-<button class="press">-</button>
+<button class="press" value="4">4</button>
+<button class="press" value="5">5</button>
+<button class="press" value="6">6</button>
+<button class="press" value="-">-</button>
 </div>
 <div class="row">
-<button class="press" value="E">E</button>
-<button class="press" value="F">F</button>
+<button class="press">E</button>
+<button class="press">F</button>
 <button class="press" value="1">1</button>
 <button class="press" value="2">2</button>
 <button class="press" value="3">3</button>
@@ -57,10 +56,21 @@ Calculator
 <button class="press">&nbsp;</button>
 <button class="press">&nbsp;</button>
 <button class="press">±</button>
-<button class="press">0</button>
+<button class="press" value="0">0</button>
 <button class="press">&nbsp;</button>
-<button class="press">5</button>
+<button class="press" value="=">=</button>
 </div>
 </div>
+<script>
+var keys = document.querySelectorAll('.press');
+for(var i=0;i<keys.length;i++){
+	keys[i].onclick=function(e){
+		var value=this.value;
+		var display=document.querySelector('#area');
+		var displayValue=display.innerHTML;
+		display.innerHTML+=value;		
+	}
+}
+</script>
 </body>
 </html> 
