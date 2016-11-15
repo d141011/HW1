@@ -5,10 +5,11 @@ body{
 }
 
 .wrapper{
-	height: 470px;
-    width: 201px;
+	     position: absolute;
+     left: 50%;
+     transform: translateX(-50%);
+	display:inline-block;
 	 background-color:rgba(0, 0, 0,0.6);
-    margin: 0 auto; /* to make the div center align to the browser */
     padding: 20px;
 	border-radius:20px;
 }
@@ -20,17 +21,34 @@ body{
 	font-size:18px;
 }
 
-.area{
+#area{
 	padding:10px;
-	border: #fff solid 3px;
+	border-style: inset;
 	color:#fff;
 	text-align:right;
 	height:15px;
 	overflow:hidden;
 }
 
-.convert{
+#input{
+	padding:10px;
+	border-bottom:#ff9999 solid 1px;
+	color:#ff9999;
+	text-align:right;
+	height:15px;
+	overflow:hidden;
+	font-size:16px;
+}
+
+.convert p{
+	margin-top:0px;
+	margin-bottom:0px;
+	padding:10px;
 	color:#fff;
+}
+
+.convert p:hover{
+	background-color:lightgrey;
 }
 
 .row{

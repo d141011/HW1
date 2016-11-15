@@ -12,57 +12,106 @@
 <div class="header">
 Calculator
 </div>
-<div id="area" class="area">
+<div id="area"">
+</div>
+<div id="input">
 </div>
 <div class="convert">
-<p>HEX <span id="hex"></span></p>
-<p>DEC <span id="dec"></span></p>
-<p>OCT <span id="oct"></span></p>
-<p>BIN <span id="bin"></span></p>
+<p id="hex" onclick="hex(this)">HEX <span></span></p>
+<p id="dec" onclick="dec(this)" style="background-color:grey;">DEC <span></span></p>
+<p id="oct" onclick="oct(this)">OCT <span></span></p>
+<p id="bin" onclick="bin(this)">BIN <span></span></p>
 </div>
 <div class="row">
-<button class="press" value="CE">CE</button>
-<button class="press" value="C">C</button>
+<button class="press">&nbsp;</button>
+<button class="press">&nbsp;</button>
+<button style="color:lightblue" class="press" value="CE">CE</button>
+<button style="color:lightblue" class="press" value="clear">C</button>
 <button class="press" value="back">←</button>
-<button class="press" value="%">%</button>
+<button class="press" value="÷">÷</button>
 </div>
 <div class="row">
+<button class="press" value="A">A</button>
+<button class="press" value="B">B</button>
 <button class="press" value="7">7</button>
 <button class="press" value="8">8</button>
 <button class="press" value="9">9</button>
 <button class="press" value="*">x</button>
 </div>
 <div class="row">
+<button class="press" value="C">C</button>
+<button class="press" value="D">D</button>
 <button class="press" value="4">4</button>
 <button class="press" value="5">5</button>
 <button class="press" value="6">6</button>
 <button class="press" value="-">-</button>
 </div>
 <div class="row">
+<button class="press" value="E">E</button>
+<button class="press" value="F">F</button>
 <button class="press" value="1">1</button>
 <button class="press" value="2">2</button>
 <button class="press" value="3">3</button>
 <button class="press" value="+">+</button>
 </div>
 <div class="row">
+<button class="press">&nbsp;</button>
+<button class="press">&nbsp;</button>
 <button class="press" value="Mod">Mod</button>
 <button class="press" value="0">0</button>
-<button class="press" value="/">/</button>
+<button class="press" value="np">±</button>
 <button class="press" value="=">=</button>
 </div>
 </div>
 <script>
 var keys = document.querySelectorAll('.press');
-
+function hex(x) {
+	var y = document.querySelector(".convert").querySelectorAll("p");
+	for(var i=0;i<y.length;i++){
+		y[i].style.backgroundColor="";
+	}
+	 x.style.background = "grey";
+}
+function dec(x) {
+	var y = document.querySelector(".convert").querySelectorAll("p");
+	for(var i=0;i<y.length;i++){
+		y[i].style.backgroundColor="";
+	}
+	x.style.background = "grey";
+}
+function oct(x) {
+	var y = document.querySelector(".convert").querySelectorAll("p");
+	for(var i=0;i<y.length;i++){
+		y[i].style.backgroundColor="";
+	}
+	x.style.background = "grey";
+}
+function bin(x) {
+	var y = document.querySelector(".convert").querySelectorAll("p");
+	for(var i=0;i<y.length;i++){
+		y[i].style.backgroundColor="";
+	}
+	x.style.background = "grey";
+}
 for(var i=0;i<keys.length;i++){
 	keys[i].onclick=function(e){
 		var value=this.value;
 		var display=document.querySelector('#area');
 		var displayValue=display.innerHTML;
-		if(displayValue.length<=13 && value!="=" && value!="CE" && value!="C" && value!="back")
-			display.innerHTML+=value;		
-		if(value=="=")
-			display.innerHTML=eval(displayValue);
+		var input=document.querySelector('#input');
+		var inputValue=input.innerHTML;
+		if(displayValue.length<=13 && value!="=" && value!="CE" && value!="back" && value!="clear" && value!="Mod" && value!="np" && value!="+" && value!="-" && value!="*" && value!="/")
+			input.innerHTML+=value;
+		if(value=="+" || value=="-" || value=="*" || value=="/"){
+			mix=inputValue+value;
+			display.innerHTML+=mix;
+			input.innerHTML="";
+		}
+		if(value=="="){
+			display.innerHTML+=inputValue;
+			input.innerHTML="";
+			display.innerHTML=eval(display.innerHTML);
+		}
 		if(value=="back")
 			display.innerHTML=displayValue.replace(/.$/,"");
 		if(value=="C")
