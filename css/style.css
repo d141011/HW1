@@ -1,5 +1,5 @@
 body{
-	background-color:#dddddd;
+	background:url('../img/background.png') no-repeat center center fixed; 
 	font-family:serif,sans-serif,cursive,fantasy,monospace;
 	font-size:14px;
 }
@@ -9,7 +9,7 @@ body{
      left: 50%;
      transform: translateX(-50%);
 	display:inline-block;
-	 background-color:rgba(0, 0, 0,0.6);
+	 background-color:rgba(0, 0, 0,0.8);
     padding: 20px;
 	border-radius:20px;
 }
@@ -19,6 +19,7 @@ body{
 	text-align:center;
 		color:#fff;
 	font-size:18px;
+	font-family: Monospace;
 }
 
 #area{
