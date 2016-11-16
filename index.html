@@ -15,6 +15,7 @@ Programming Calculator
 </div>
 <div id="area"></div>
 <div id="input"></div>
+<div id="show"></div>
 <div class="convert">
 <p style="margin-top:10px;" id="hex" onclick="hex(this)">HEX <span></span></p>
 <p id="dec" onclick="dec(this)" style="background-color:grey;">DEC <span></span></p>
@@ -30,24 +31,24 @@ Programming Calculator
 <button class="press" value="/">÷</button>
 </div>
 <div class="row">
-<button class="press" value="a" disabled>A</button>
-<button class="press" value="b" disabled>B</button>
+<button class="press" value="A" disabled>A</button>
+<button class="press" value="B" disabled>B</button>
 <button class="press" value="7">7</button>
 <button class="press" value="8">8</button>
 <button class="press" value="9">9</button>
 <button class="press" value="*">x</button>
 </div>
 <div class="row">
-<button class="press" value="c" disabled>C</button>
-<button class="press" value="d" disabled>D</button>
+<button class="press" value="C" disabled>C</button>
+<button class="press" value="D" disabled>D</button>
 <button class="press" value="4">4</button>
 <button class="press" value="5">5</button>
 <button class="press" value="6">6</button>
 <button class="press" value="-">-</button>
 </div>
 <div class="row">
-<button class="press" value="e" disabled>E</button>
-<button class="press" value="f" disabled>F</button>
+<button class="press" value="E" disabled>E</button>
+<button class="press" value="F" disabled>F</button>
 <button class="press" value="1">1</button>
 <button class="press" value="2">2</button>
 <button class="press" value="3">3</button>
@@ -68,10 +69,12 @@ var decStorage="";
 
 $(document).ready(function(){
 	$('#input').bind('DOMNodeInserted DOMSubtreeModified DOMNodeRemoved', function(event) {
+	if(document.querySelector('#input').innerHTML=='NaN') document.querySelector('#input').innerHTML=$('#show>p').html();
     var hexValue=document.getElementById('hex').querySelector('span');
 	toHex=parseInt(document.querySelector('#input').innerHTML,numType);
-	if(toHex<0) hexValue.innerHTML=(toHex>>>0).toString(16).slice(4,8);
-	else hexValue.innerHTML=toHex.toString(16);
+	if(toHex<0) hexValue.innerHTML=(toHex>>>0).toString(16).slice(4,8).toUpperCase();
+	else hexValue.innerHTML=toHex.toString(16).toUpperCase();
+	if(toHex.toString(16)=='NaN') hexValue.innerHTML='NaN';
 	var decValue=document.getElementById('dec').querySelector('span');
 	decValue.innerHTML=parseInt(document.querySelector('#input').innerHTML,numType).toString();
 	var octValue=document.getElementById('oct').querySelector('span');
@@ -88,51 +91,71 @@ $(document).ready(function(){
 
 function hex(x) {
 	numType=16;
+	var temp=document.querySelector("#area").innerHTML;
+	$('#area').html('Hex('+$('#show>p').html()+')'+temp.substr(temp.length-1));
+	if($(x).find('span').html()!='NaN') $('#input').html($(x).find('span').html());
 	var y = document.querySelector(".convert").querySelectorAll("p");
 	for(var i=0;i<y.length;i++){
 		y[i].style.backgroundColor="";
 	}
 	x.style.background = "grey";
-	var m=document.querySelectorAll("button[value='a'],button[value='b'],button[value='c'],button[value='d'],button[value='e'],button[value='f']");
+	var m=document.querySelectorAll("button[value='A'],button[value='B'],button[value='C'],button[value='D'],button[value='E'],button[value='F']");
 	for(var i=0;i<m.length;i++){
 	 m[i].disabled=false;
 	}
 }
 function dec(x) {
 	numType=10;
+	var temp=document.querySelector("#area").innerHTML;
+	$('#area').html('Dec('+$('#show>p').html()+')'+temp.substr(temp.length-1));
+	if($(x).find('span').html()!='NaN') $('#input').html($(x).find('span').html());
 	var y = document.querySelector(".convert").querySelectorAll("p");
 	for(var i=0;i<y.length;i++){
 		y[i].style.backgroundColor="";
 	}
 	x.style.background = "grey";
-	var m=document.querySelectorAll("button[value='a'],button[value='b'],button[value='c'],button[value='d'],button[value='e'],button[value='f']");
-	for(var i=0;i<m.length;i++){
-	 m[i].disabled=true;
+	var r=document.querySelectorAll("button[value='A'],button[value='B'],button[value='C'],button[value='D'],button[value='E'],button[value='F']");
+	for(var i=0;i<r.length;i++){
+	 r[i].disabled=true;
 	}
+	var m=document.querySelectorAll("button[value='2'],button[value='3'],button[value='4'],button[value='5'],button[value='6'],button[value='7'],button[value='8'],button[value='9']");
+	for(var i=0;i<m.length;i++){
+	 m[i].disabled=false;
+	}	
 }
 function oct(x) {
 	numType=8;
+	var temp=document.querySelector("#area").innerHTML;
+	$('#area').html('Oct('+$('#show>p').html()+')'+temp.substr(temp.length-1));
+	if($(x).find('span').html()!='NaN') $('#input').html($(x).find('span').html());
 	var y = document.querySelector(".convert").querySelectorAll("p");
 	for(var i=0;i<y.length;i++){
 		y[i].style.backgroundColor="";
 	}
 	x.style.background = "grey";
-	var m=document.querySelectorAll("button[value='a'],button[value='b'],button[value='c'],button[value='d'],button[value='e'],button[value='f'],button[value='8'],button[value='9']");
+	var r=document.querySelectorAll("button[value='A'],button[value='B'],button[value='C'],button[value='D'],button[value='E'],button[value='F'],button[value='8'],button[value='9']");
+	for(var i=0;i<r.length;i++){
+	 r[i].disabled=true;
+	}	
+	var m=document.querySelectorAll("button[value='2'],button[value='3'],button[value='4'],button[value='5'],button[value='6'],button[value='7']");
 	for(var i=0;i<m.length;i++){
-	 m[i].disabled=true;
+	 m[i].disabled=false;
 	}	
 }
 function bin(x) {
 	numType=2;
+	var temp=document.querySelector("#area").innerHTML;
+	$('#area').html('Bin('+$('#show>p').html()+')'+temp.substr(temp.length-1));
+	if($(x).find('span').html()!='NaN') $('#input').html($(x).find('span').html());
 	var y = document.querySelector(".convert").querySelectorAll("p");
 	for(var i=0;i<y.length;i++){
 		y[i].style.backgroundColor="";
 	}
 	x.style.background = "grey";
-	var m=document.querySelectorAll("button[value='a'],button[value='b'],button[value='c'],button[value='d'],button[value='e'],button[value='f'],button[value='3'],button[value='4'],button[value='5'],button[value='6'],button[value='7'],button[value='8'],button[value='9']");
+	var m=document.querySelectorAll("button[value='A'],button[value='B'],button[value='C'],button[value='D'],button[value='E'],button[value='F'],button[value='2'],button[value='3'],button[value='4'],button[value='5'],button[value='6'],button[value='7'],button[value='8'],button[value='9']");
 	for(var i=0;i<m.length;i++){
 	 m[i].disabled=true;
-	}	
+	}		
 }
 
 var keys = document.querySelectorAll('.press');
@@ -149,21 +172,39 @@ for(var i=0;i<keys.length;i++){
 			input.innerHTML+=value;
 		}
 		if(value=="+" || value=="-" || value=="*" || value=="/" || value=="%"){
+			if(displayValue.length>0 || inputValue.length>0){
+			decStorage+=parseInt(inputValue,numType).toString();
+			if(numType==16){
+				$("#show").html("<p style='float:left;color:#ccffcc;margin-top:-25px;margin-left:10px;font-size: 16px;'>"+parseInt(eval(decStorage)).toString(16)+"</p>");
+			}
+			else if(numType==10) $("#show").html("<p style='float:left;color:#ccffcc;margin-top:-25px;margin-left:10px;font-size: 16px;'>"+parseInt(eval(decStorage)).toString()+"</p>");
+			else if(numType==8) $("#show").html("<p style='float:left;color:#ccffcc;margin-top:-25px;margin-left:10px;font-size: 16px;'>"+parseInt(eval(decStorage)).toString(8)+"</p>");
+			else if(numType==2) $("#show").html("<p style='float:left;color:#ccffcc;margin-top:-25px;margin-left:10px;font-size: 16px;'>"+parseInt(eval(decStorage)).toString(2)+"</p>");
+			decStorage+=value;
+			input.innerHTML="";
 			mix=inputValue+value;
 			display.innerHTML+=mix;
-			input.innerHTML="";
+			}
 		}
-		if(value=="="){
+		if(value=="=" && displayValue!=null){
+			decStorage+=parseInt(inputValue,numType).toString();
 			display.innerHTML+=inputValue;
 			input.innerHTML="";
-			input.innerHTML=parseInt(eval(display.innerHTML));
+			if(numType==16){
+				input.innerHTML=parseInt(eval(decStorage)).toString(16);
+			}
+			else if(numType==10) input.innerHTML=parseInt(eval(decStorage)).toString();
+			else if(numType==8) input.innerHTML=parseInt(eval(decStorage)).toString(8);
+			else if(numType==2) input.innerHTML=parseInt(eval(decStorage)).toString(2);
 			display.innerHTML="";
+			decStorage="";
 		}
 		if(value=="back")
 			input.innerHTML=inputValue.replace(/.$/,"");
 		if(value=="clear"){
 			input.innerHTML="";
 			display.innerHTML="";
+			$('#show').html("");
 		}
 		if(value=="CE")
 			input.innerHTML="";
